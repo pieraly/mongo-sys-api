@@ -1,11 +1,6 @@
 listener:
   host: "localhost"
   port: "8084"
-
-request:
-  host: "api.rawg.io"
-  path: "/api"
-  port: ""
   
 mongo:
   user: "pieraly"
