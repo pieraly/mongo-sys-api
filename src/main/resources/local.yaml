@@ -1,0 +1,21 @@
+listener:
+  host: "localhost"
+  port: "8084"
+
+request:
+  host: "api.rawg.io"
+  path: "/api"
+  port: ""
+  
+ReqDate:
+  host: "localhost"
+  port: "8089"
+  
+ReqRat:
+  host: "localhost"
+  port: "8090"
+  
+mongo:
+  user: "pieraly"
+  mdp: "raySTE"
+  name: "Games"

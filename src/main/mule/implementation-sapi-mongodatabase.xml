@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:mongo="http://www.mulesoft.org/schema/mule/mongo" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/mongo http://www.mulesoft.org/schema/mule/mongo/current/mule-mongo.xsd">
+	<flow name="GET-sapi-mongodatabaseFlow1" doc:id="2d24dcca-5c4b-4078-8615-a41433c30512">
+		<logger level="INFO" doc:name="Before Search" doc:id="129836b4-d6fa-461c-840b-dd1e35176540" message="#[payload]" />
+		<mongo:find-documents collectionName="Games" fields="," doc:name="Find documents" doc:id="344273ad-4637-4b43-9fc5-65f2b4f3ad58" config-ref="MongoDB_Config">
+			<mongo:query ><![CDATA[#[output application/json
+---
+{
+	("date_released" : {"\$gt" :attributes.queryParams.date}) if (!isEmpty(attributes.queryParams.date)),
+	 ("stores" : attributes.queryParams.store) if (!isEmpty(attributes.queryParams.store)),
+    ("genres" : attributes.queryParams.genre) if (!isEmpty(attributes.queryParams.genre)),
+    ("platforms" : attributes.queryParams.platform) if (!isEmpty(attributes.queryParams.platform)),
+    ("released" : attributes.queryParams.released) if (!isEmpty(attributes.queryParams.released) )
+}]]]></mongo:query>
+		</mongo:find-documents>
+		<ee:transform doc:name="Show Payload" doc:id="31ed666a-4184-4ddc-b92a-1979412021e3">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+		<logger level="INFO" doc:name="After Search" doc:id="7489a39a-2ed4-4a29-8e76-b617ddd14716" message="#[payload]" />
+	</flow>
+	<flow name="POST-sapi-mongodatabaseFlow" doc:id="22003811-42b3-4909-860a-9e698bbe80eb" >
+		<logger level="INFO" doc:name="Logger" doc:id="4734ac77-6472-4ec3-ba0b-7a6560e9ecbe" />
+		<mongo:insert-document doc:name="Insert Games to MongoDB" doc:id="69dabc58-21ed-4255-92ff-2cba274ead1a" collectionName="Games" config-ref="MongoDB_Config" />
+		<logger level="INFO" doc:name="After For Each" doc:id="3cd9cb85-91f6-45a5-b2f5-044b233e45e2" />
+	</flow>
+</mule>
