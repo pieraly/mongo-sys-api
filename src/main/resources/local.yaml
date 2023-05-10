@@ -7,13 +7,6 @@ request:
   path: "/api"
   port: ""
   
-ReqDate:
-  host: "localhost"
-  port: "8089"
-  
-ReqRat:
-  host: "localhost"
-  port: "8090"
   
 mongo:
   user: "pieraly"
