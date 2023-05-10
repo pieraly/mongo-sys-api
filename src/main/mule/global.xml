@@ -9,9 +9,6 @@ http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/sc
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="e03821ad-4d4d-415a-897a-6a29cf21b8f8" >
 		<http:listener-connection host="${http.host}" port="${http.port}" />
 	</http:listener-config>
-	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="e02aac13-c942-4cac-9450-a520eacf7a22" basePath="/api">
-		<http:request-connection host="${request.host}" />
-	</http:request-config>
 	<mongo:config name="MongoDB_Config" doc:name="MongoDB Config" doc:id="8e642425-a77f-42e1-8a9f-55d5c3d5b9ff" >
 		<mongo:connection-string-connection connectionString="mongodb+srv://${mongo.user}:${mongo.mdp}@cluster0.bkhuxvi.mongodb.net/${mongo.name}"/>
 	</mongo:config>
