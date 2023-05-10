@@ -25,7 +25,7 @@
 				<version>3.2.0</version>
 			</plugin>
 			<plugin>
-			<groupId>org.mule.tools.maven</groupId>
+				<groupId>org.mule.tools.maven</groupId>
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>3.8.2</version>
 				<extensions>true</extensions>
@@ -41,6 +41,12 @@
 						<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
 					<classifier>mule-application</classifier>
+					<sharedLibraries>
+						<sharedLibrary>
+							<groupId>org.mongodb</groupId>
+							<artifactId>mongodb-driver-legacy</artifactId>
+						</sharedLibrary>
+					</sharedLibraries>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -66,11 +72,6 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongodb-driver-legacy</artifactId>
-			<version>4.0.4</version>
-		</dependency>
-		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-apikit-module</artifactId>
 			<version>1.8.1</version>
@@ -81,6 +82,11 @@
 			<artifactId>mule-secure-configuration-property-module</artifactId>
 			<version>1.2.5</version>
 			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.mongodb</groupId>
+			<artifactId>mongodb-driver-legacy</artifactId>
+			<version>4.0.0</version>
 		</dependency>
 	</dependencies>
 
